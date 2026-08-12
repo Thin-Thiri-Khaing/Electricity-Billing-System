@@ -1,0 +1,113 @@
+package Server;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+import java.sql.*;
+
+
+public class feedbackList extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public feedbackList() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter pw=response.getWriter();
+		pw.println("<!DOCTYPE html>");
+		pw.println("<html>");
+		pw.println("<head>");
+		pw.println("<link rel='stylesheet' href='/ElectricityBill_Project/external.css'>");
+		pw.println("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css' integrity='sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=='crossorigin='anonymous' referrerpolicy='no-referrer' />");
+		pw.println("<style>");
+		
+		pw.println(".navbar{margin-left:420px; }");
+		pw.println("  .dropdown-content{min-width: 190px;}");
+		pw.println(".navbar ul li a.current:link , .navbar ul li a.current:visited {color : white;}");
+		pw.println("*{font-family : 'Cambria'}");
+		pw.println("h1{margin-top : 5vh; color : #0077B6}");
+		pw.println("table{width:100%;  color:black;  border-bottom:2px solid black; margin-top : 5vh;}");
+		pw.println("tr:nth-child(odd){background-color:lightgray;}");
+		pw.println("td{padding:15px; color: #0077B6; font-size: 20px; font-weight: bold;}");
+		pw.println("th{font-size:20px; padding: 10px 5px; background-color: #0077b6; color :white; }");
+		
+		pw.println(".textinput{ font-size : 20px; border : none; outline : none;  background-color: rgba(236,236,236); width:80%;}");
+		pw.println(".filter{margin : 2vh 0;  width: 20%; border: 2px solid lightgray;  height: 30px;  margin-left: 900px;  padding: 3px 10px;  background-color: rgba(236,236,236);}");
+		pw.println(".search{ display: flex; }");
+		pw.println("#btn{margin : 2vh 0; transition : .5s; width: 8%;  height: 40px; color : black;  border: 2px solid lightgray;  font-size: 20px;  padding: 3px 10px; background-color: rgba(236,236,236); margin-left: 10px;}");
+		pw.println("#btn:hover {background-color: lightgray; transition : .5s;}");
+		pw.println(".wel{width:60vh;color : #E7CEA6;font-size : 20px; font-weight : bold;	padding : 12px 0 10px 10px;}");
+		    
+		
+		pw.println("</style>");
+		pw.println("</head>");
+		pw.println("<body>");
+		pw.println("   <div class='banner'>");
+		pw.println("<div class='logo'><img src='logo.png' class='logo' width='50px' height='50px' ></a>&nbsp;</div>");
+		pw.println("<p class='wel' >Welcome admin!</p>");
+	    pw.println(" <div class='navbar'><ul><li><a href='adminHome.jsp'><i class='fa fa-home'></i> Home</a></li><li><a href='unitRate_Admin'><i class='fa-solid fa-calculator'></i>&nbsp;&nbsp;Unit Rate</a></li><li> <a href='MainHome.jsp'><i class='fa-regular fa-user'></i> Log Out &nbsp;&nbsp;&nbsp;&nbsp; </a></li><li class='dropdown'><a href='#' class='dropbtn current' ><i class = 'fas fa-bars'></i> MENU &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a><div class='dropdown-content'><a href='userServlet'>UserList</a><a href='paymentList'>PaymentList</a><a href='unitControl?action=LIST1'>UnitList</a><a href='#' class='current'>User Feedbacks</a></div></li></ul> </div></div> ");
+	    
+		pw.println(" <h1 align = 'center' style=''>User Feedbacks</h1>");
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:2002/Electricity","root","thin");
+			Statement smt=con.createStatement();
+			ResultSet rs=smt.executeQuery("select * from user_feedback");
+			
+			pw.println("<form action='feedbackFilter' method='post' >");
+			
+			pw.println("<div class = 'search'>");
+			pw.println("<div class='filter'> ");
+			pw.println("<span><i class='fa-solid fa-search'></i></span>");
+			pw.println(" <input type='text' name='name' id='textbox' placeholder='Search Name' required' class='textinput'>");
+			pw.println("</div>");
+			pw.println("<button type='submit' id='btn'><i class='fa-solid fa-filter'></i>&nbsp;&nbsp;&nbsp;Filter</button>");
+			
+			pw.println("</div");
+			pw.println("</form>");
+			
+			pw.println("<table><tr><th  id='data'>FB_ID </th>");
+			pw.println("<th  id='data'> Name </th>");
+			pw.println("<th  id='data'> Email </th>");
+			pw.println("<th  id='data'> Phone </th>");
+			pw.println("<th  id='data'> Message </th>");
+			while(rs.next()) {
+				int id=rs.getInt("fb_id");
+				String name=rs.getString("name");
+				String email=rs.getString("email");
+				String phone=rs.getString("phone");
+				String message=rs.getString("message");
+				
+				
+				pw.println("<tr><td id='data'>" + id + "</td>");
+				pw.println("<td  id='data'>" + name + "</td>");
+				pw.println("<td  id='data'>" + email + "</td>");
+				pw.println("<td  id='data'>" + phone + "</td>");
+				pw.println("<td  id='data'>" + message + "</td>");
+				
+			}
+			pw.println("</table>");
+			
+			pw.println("</body>");
+			pw.println("</html>");
+			smt.close();
+			con.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		doGet(request, response);
+//	}
+
+}

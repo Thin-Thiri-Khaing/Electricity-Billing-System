@@ -1,0 +1,144 @@
+@charset "ISO-8859-1";
+
+	  *{
+       
+        padding: 0;
+        margin: 0;
+        font-family: 'Cambria';
+    }
+    
+       /* banner */
+
+    .banner{
+    /* width: 70%;  */
+    height: 100%;
+    background-color: #0077b6;
+    background-attachment:scroll;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px; 
+ }
+ 
+ 	.logo{
+ 		height: 45px;
+	}
+
+
+.navbar{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 400px;
+   
+}    
+
+
+
+.banner h1{
+    color: white;
+}
+
+.navbar ul li{
+    list-style: 
+    none;
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+       
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    font-size: 20px;
+    color: #E7CEA6;
+    display: block;
+    font-weight: 800;
+}
+/* banner */
+      
+
+	/* DopDown */
+	
+	 li a, .dropbtn {
+	    display: inline-block;
+	    color: white;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	  }
+	  
+	  li a:hover, .dropdown:hover .dropbtn {
+	    color: white;
+	    transition: .3s;
+	  }
+	  
+	  li.dropdown {
+	    display: inline-block;
+	  }
+	  
+	  .dropdown-content {
+	    display: none;
+	    position: absolute;
+	    background-color:#0077b6;
+	    min-width: 170px;
+	    min-height : 30px;
+	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	    z-index: 1;
+	  }
+	  
+	  .dropdown-content a {
+	    text-decoration: none;
+	    display: block;
+	    text-align: left;
+	  }
+	
+	  .navbar a:hover{
+	      color: white;
+	  }
+	  
+	  .dropdown-content a:hover {
+	     background-color : blue;
+
+	     
+	    }
+	  
+	  .dropdown:hover .dropdown-content {
+	    display: block;
+	  }
+	
+	  .nov{
+	    text-decoration:none;
+	    color:white;
+	  }
+	
+	  /* drop down */
+	  
+	  /* submit */
+	  
+	  .btn{
+                    width: 40%;
+                    height: 40px;
+                    color: white;
+                    background-color: #0077b6;
+                    border-color: cadetblue;
+                    
+                    padding: 5px 5px;
+                    margin-top: 0;
+              
+                    border-radius: 20px;
+                    font-size: 20px;
+                	transition : .5s;
+                }
+                
+                .btn:hover{
+                
+                	background-color:blue;
+                	transform : scale(1.1,1.1);
+                	transition:.5s;
+              
+                }
+                /*submit*/
+                
+               
